@@ -1,0 +1,20 @@
+<div class="upload-wrap">
+  <button class="btn btn-primary" type="button" ng-hide="to.readonly">
+    <span ng-if="!filename" id="s3-upload-button-handler">{{to.chooseFileText || 'Izaberite datoteku'}}</span>
+    <span ng-if="filename" id="s3-upload-button-handler">{{to.changeFileText || 'Zamijenite datoteku'}}</span>
+  </button>
+
+  <button class="btn btn-success" id="s3-upload-button-handler" type="button" ng-if="!renderVideo && (to.type === 'video' || isVideo)" ng-click="startVideoRender()">
+    <span>Pokrenite video</span>
+  </button>
+
+  <a ng-href="{{ filename }}" class="btn btn-info" target="_blank" ng-if="filename" id="s3-upload-button-handler">Otvorite datoteku</a>
+  <span ng-show="uploading && !hideUploadingLabel">Slanje u tijeku...</span>
+  <span ng-show="loading">Učitavanje u tijeku...</span>
+  <div class="progress" style="margin-top: 10px;" ng-show="attempt && uploading">
+    <div class="progress-bar progress-bar-striped progress-bar-danger" ng-class="{active: uploading, 'bar-success': isUploadSuccessful()}" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%;">
+      <span class="sr-only" style="position: relative">{{progress}}%</span>
+    </div>
+  </div>
+  <input type="file" accept="{{::to.accept}}" class="hidden"/>
+</div>
